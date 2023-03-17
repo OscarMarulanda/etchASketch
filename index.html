@@ -9,38 +9,87 @@
 </head>
 <body>
     <div id="container"></div>
+    <div>
+    <button id="rainbow">rainbow</button>
+    <button id="black">black</button>
+    <button id="clear">clear</button>
+    <label for="numSqr">Number of squares per side (up to 100):</label>
+    <input type="range" id="numSqr" name="numSqr" required
+       min="1" max="100" size="10" step="1">
+    <p>Number: <output id="value"></output></p>
+    <button id="create">create new grid</button>
+    
+    
+
+
+    </div>
     <script>
         const cont = document.querySelector("#container");
+        const black = document.querySelector('#black');
+        const rainbow = document.querySelector('#rainbow');
+        const clear = document.querySelector('#clear');
+        const create = document.querySelector('#create');
+        const numSqr = document.querySelector("#numSqr");
+        const value = document.querySelector("#value");
+        
 
-        function squares(){
-            let num = prompt("enter number of squares per side for new grid (up to 100)");
-            if(num>100){
-                alert("enter a number lower than 101");
-                squares();
-            }else{
-                let width = ((1000/num)-2)+"px";
-                let height = ((1000/num)-2) +"px";
+        value.textContent = numSqr.value
+        numSqr.addEventListener("input", (event) => {
+            value.textContent = event.target.value
+        });
 
 
+        
 
+        create.addEventListener('click', function(){
+              
+            let num = numSqr.value;
+            
+                
+            let width = ((1000/num)-3)+"px";
+            let height = ((1000/num)-3) +"px";
+            for(let i = 0; i<1; i++){
+                cont.innerHTML="";
                 for(let i=0; i<num; i++){
                     for(let i=0; i<num; i++){
                     const div = document.createElement('div');
                     div.style.width = `${width}`;
                     div.style.height = `${height}`;
                     div.style.border = "1px solid purple";
-                    div.addEventListener('mouseover', function (e) {
-                        e.target.style.background = 'blue';
+                    black.addEventListener('click', function(){
+                        div.addEventListener('mouseover', function (e) {
+                            e.target.style.background = `black`;
+                            });
                         });
+                    rainbow.addEventListener('click', function(){
+                        div.addEventListener('mouseover', function (e) {
+                            e.target.style.background = `rgb(${Math.floor((Math.random() * 255) + 1)}, ${Math.floor((Math.random() * 255) + 1)}, ${Math.floor((Math.random() * 255) + 1)})`;
+                            });
+                        });
+                    clear.addEventListener('click', function(){
+                        div.style.background = '';
+                        });
+                    
+
                     cont.appendChild(div);
-                    }
+                    
+                    
+                
+                }
+                    
                 }
             }
-        }
-        squares();
+            
+            
+            
+        });
+        
+        
+        
 
         
 
     </script>
+    
 </body>
 </html>
