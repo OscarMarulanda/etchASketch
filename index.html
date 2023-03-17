@@ -13,27 +13,34 @@
         const cont = document.querySelector("#container");
 
         function squares(){
-        let num = prompt("enter number of squares per side for new grid (up to 100)");
-        if(num>100){
-            alert("enter a number lower than 101");
-            squares();
-        }else{
-        let width = ((1000/num)-2)+"px";
-        let height = ((1000/num)-2) +"px";
+            let num = prompt("enter number of squares per side for new grid (up to 100)");
+            if(num>100){
+                alert("enter a number lower than 101");
+                squares();
+            }else{
+                let width = ((1000/num)-2)+"px";
+                let height = ((1000/num)-2) +"px";
 
-        for(let i=0; i<num; i++){
-            for(let i=0; i<num; i++){
-            const div = document.createElement('div');
-            div.style.width = `${width}`;
-            div.style.height = `${height}`;
-            div.style.border = "1px solid black";
-            
-            cont.appendChild(div);
+
+
+                for(let i=0; i<num; i++){
+                    for(let i=0; i<num; i++){
+                    const div = document.createElement('div');
+                    div.style.width = `${width}`;
+                    div.style.height = `${height}`;
+                    div.style.border = "1px solid purple";
+                    div.addEventListener('mouseover', function (e) {
+                        e.target.style.background = 'blue';
+                        });
+                    cont.appendChild(div);
+                    }
+                }
             }
         }
-    }
-    }
-    squares();
+        squares();
+
+        
+
     </script>
 </body>
 </html>
